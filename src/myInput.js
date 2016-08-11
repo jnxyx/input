@@ -14,6 +14,8 @@
                         case 'percent':
                             myInput.percentValue(this);
                             break;
+                        case 'percenti':
+                            myInput.percentiValue(this);
                     }
 
                 }
@@ -49,19 +51,27 @@
                 return g;
             });
             var parts = val.split('.');
-            parts[0] = parts[0].replace(/\d/gm, function(g, i) {
-                return i < 2 ? g : '';
+            parts[0] = parts[0].replace(/\d/gm, function(g, i, a) {
+                return a[0] == 1 && a[1] == 0 && a[2] == 0 && i == 2 ? g : (i < 2 ? g : '');
             });
-            if (parts[1]) {
+            if (parts.length > 1 && parts[0] != 100) {
                 parts[1] = parts[1].replace(/\d/gm, function(g, i) {
                     return i < 2 ? g : '';
                 });
                 parts[0] = parts[0] + '.' + parts[1];
             }
             $(el).val(parts[0]);
+        },
+        percentiValue: function(el) {
+            var val = $(el).val();
+            val = val.replace(/\D/gm, '');
+            if (Number(val) > 100) {
+                val = 100;
+            }
+            $(el).val(val);
         }
     }
     try {
         myInput.init();
-    } catch (e) { alert('Please update you jQuery,any question contact with Xiang ge!') }
+    } catch (e) { alert('Please update you jQuery!') }
 })(jQuery)
