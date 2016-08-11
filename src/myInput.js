@@ -2,7 +2,7 @@
     var myInput = {
         init: function() {
             $(document).on({
-                keyup: function() {
+                input: function() {
                     var type = $(this).attr('myType');
                     switch (type) {
                         case 'int':
@@ -27,8 +27,15 @@
             var val = $(el).val();
             var i = 0;
             val = val.replace(/\D/gm, function(g) {
-                return g == '.' && !i ? (g, ++i) : '';
+                return g == '.' && !i ? (++i, g) : '';
             });
+            var ext = $(el).attr('myExt');
+            if (ext) {
+                ext = Number(ext);
+                if (!isNaN(ext) && val.length > (ext + 3)) {
+                    val = val.substr(0, ext + 3);
+                }
+            }
             $(el).val(val);
         },
         percentValue: function(el) {
