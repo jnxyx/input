@@ -1,3 +1,4 @@
+;
 (function($) {
     var myInput = {
         init: function() {
@@ -74,4 +75,4 @@
     try {
         myInput.init();
     } catch (e) { alert('Please update you jQuery!') }
-})(jQuery)
+}).call(this, jQuery)
