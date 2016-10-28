@@ -35,8 +35,8 @@
             var ext = $(el).attr('myExt');
             if (ext) {
                 ext = Number(ext);
-                if (!isNaN(ext) && val.length > (val.indexOf('.') + 3) && val.indexOf('.') > -1) {
-                    val = val.substr(0, val.indexOf('.') + 3);
+                if (!isNaN(ext) && val.length > (val.indexOf('.') + ext + 1) && val.indexOf('.') > -1) {
+                    val = val.substr(0, val.indexOf('.') + ext + 1);
                 }
             }
             $(el).val(val);
