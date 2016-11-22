@@ -24,7 +24,9 @@
         },
         intValue: function(el) {
             var val = $(el).val();
-            $(el).val(val.replace(/\D/gm, ''));
+            val = val.replace(/\D/gm, '');
+            val = Number(val);
+            $(el).val(val);
         },
         floatValue: function(el) {
             var val = $(el).val();
@@ -39,6 +41,7 @@
                     val = val.substr(0, val.indexOf('.') + ext + 1);
                 }
             }
+            val = Number(val);
             $(el).val(val);
         },
         percentValue: function(el) {
@@ -69,6 +72,7 @@
             if (Number(val) > 100) {
                 val = 100;
             }
+            val = Number(val);
             $(el).val(val);
         }
     }
