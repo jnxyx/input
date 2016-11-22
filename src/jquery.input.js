@@ -43,9 +43,11 @@
                     val = val.substr(0, val.indexOf('.') + ext + 1);
                 }
             }
-            if (val !== '') {
-                val = Number(val);
+            if (val !== '' && val !== '0') {
+                val = val.replace(/^(0)+/gm, '');
+                val = val.replace(/^\./, '0.');
             }
+
             $(el).val(val);
         },
         percentValue: function(el) {
@@ -76,9 +78,11 @@
             if (Number(val) > 100) {
                 val = 100;
             }
-            if (val !== '') {
-                val = Number(val);
+            if (val !== '' && val !== '0') {
+                val = val.replace(/^(0)+/gm, '');
+                val = val.replace(/^\./, '0.');
             }
+
             $(el).val(val);
         }
     }
