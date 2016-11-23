@@ -43,6 +43,11 @@
                     val = val.substr(0, val.indexOf('.') + ext + 1);
                 }
             }
+
+            if (val == '00') {
+                val = '0'
+            }
+
             if (val !== '' && val !== '0') {
                 val = val.replace(/^(0)+/gm, '');
                 val = val.replace(/^\./, '0.');
@@ -75,9 +80,15 @@
         percentiValue: function(el) {
             var val = $(el).val();
             val = val.replace(/\D/gm, '');
+            
             if (Number(val) > 100) {
                 val = 100;
             }
+
+            if (val == '00') {
+                val = '0'
+            }
+
             if (val !== '' && val !== '0') {
                 val = val.replace(/^(0)+/gm, '');
                 val = val.replace(/^\./, '0.');
