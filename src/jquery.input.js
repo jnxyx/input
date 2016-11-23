@@ -26,7 +26,7 @@
             var val = $(el).val();
             val = val.replace(/\D/gm, '');
             if (val !== '') {
-                val = Number(val);
+                val = +val;
             }
             $(el).val(val);
         },
@@ -38,7 +38,7 @@
             });
             var ext = $(el).attr('myExt');
             if (ext) {
-                ext = Number(ext);
+                ext = +ext;
                 if (!isNaN(ext) && val.length > (val.indexOf('.') + ext + 1) && val.indexOf('.') > -1) {
                     val = val.substr(0, val.indexOf('.') + ext + 1);
                 }
@@ -80,8 +80,8 @@
         percentiValue: function(el) {
             var val = $(el).val();
             val = val.replace(/\D/gm, '');
-            
-            if (Number(val) > 100) {
+
+            if (+val > 100) {
                 val = 100;
             }
 
