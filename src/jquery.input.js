@@ -17,6 +17,8 @@
                             break;
                         case 'percenti':
                             myInput.percentiValue(this);
+                        case 'char':
+                            myInput.charValue(this);
                     }
 
                 }
@@ -95,6 +97,26 @@
             }
 
             $(el).val(val);
+        },
+        charValue: function(el) {
+            var val = $(el).val();
+            var length = $(el).attr('myLength');
+
+            val = val.replace(/[^a-zA-Z0-9\u0391-\uFFE5]/gm, '');
+
+            val = val.replace(/[a-zA-Z0-9\u0391-\uFFE5]/gm, function(g, i) {
+                if (g.charCodeAt() > 256) {
+                    length -= 2;
+                } else {
+                    length--;
+                }
+
+                return length < 0 ? '' : g;
+
+            });
+
+            $(el).val(val);
+
         }
     }
     try {
