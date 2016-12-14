@@ -2,10 +2,41 @@
 <html>
 
 <head>
-    <title></title>
+	<meta charset="utf-8" />
+    <title>buble-test</title>
+    <script type="text/javascript" src="../src/jquery-2.1.4.js"></script>
+    <script type="text/javascript" src="../src/jquery.buble.js"></script>
+    <style type="text/css">
+    .test {
+        margin: 0 auto;
+        width: 800px;
+        height: 100px;
+        border: 1px solid #eee;
+        position: relative;
+        top: 200px;
+        background-color: #eee;
+    }
+
+    .buble{
+    	display: inline-table;
+    	position: relative;
+    }
+
+    .my-tooltip{
+    	position: absolute;
+    	padding: 20px;
+    	background-color: black;
+    	opacity: 0.5;
+    	border-radius: 5px;
+    	color: white;
+    	top: 0;
+    	left: 0;
+    }
+    </style>
 </head>
 
 <body>
+    <div class="test" my_buble my-tooltip="这是内容"></div>
 </body>
 
 </html>

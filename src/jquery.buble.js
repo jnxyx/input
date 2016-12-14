@@ -4,25 +4,6 @@
  * Created by xyx , On Dec 12.2016
  */
 
-/**
-    <span myBuble> 
-    </span>
-
-    <div>
-        <span myBuble> 
-        </span>
-        <span>
-            提示
-        </span>
-    </div>
-
-    <span myBuble> 
-    </span>
-    <span>
-        提示
-    </span>
- */
-
 var myBuble = {
 
     initialize: function() {
@@ -53,25 +34,43 @@ var myBuble = {
     },
 
     show: function(ele) {
-        var self = $(this);
+        var self = $(ele);
         if (self.data('hasBuble')) {
             $(ele).next().show();
+            myBuble.setPosition(self);
             return;
         }
 
+        // self.wrap('<div class="buble"></div>');
+
         var options = myBuble.getOptions(self);
 
-        var buble = $('<div></div>').html('' + options.tooltip);
+        var buble = $('<span class="my-tooltip"></span>').html('' + options.tooltip);
         if (options.class) {
             buble.addClass(options.class);
         }
 
         self.after(buble);
+
+        myBuble.setPosition(self);
+        
         self.data('hasBuble', true);
     },
 
     hide: function(ele) {
         $(ele).next().hide();
+    },
+
+    setPosition: function(ele) {
+
+        var buble = ele.next(),
+            offset = ele.offset(),
+            position = myBuble.getOptions(ele).position;
+
+        buble.css({
+            top: offset.top,
+            left: offset.left
+        });
     }
 }
 
