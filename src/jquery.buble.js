@@ -4,29 +4,47 @@
  * Created by xyx , On Dec 12.2016
  */
 
-var myBuble = {
-
+var myTooltip = {
+    tooltipTimeout: null,
     initialize: function() {
         $(document).on({
             mouseenter: function() {
-
-                myBuble.show(this);
+                myTooltip.displayTooltip($(this), true);
             },
             mouseleave: function() {
-
-                myBuble.hide(this);
+                myTooltip.displayTooltip($(this), false);
             }
-        }, '[my_buble]');
+        }, '[my-tooltip]');
+        $(document).on({
+            mouseenter: function() {
+                myTooltip.displayTooltip($(this).prev(), true);
+            },
+            mouseleave: function() {
+                myTooltip.displayTooltip($(this).prev(), false);
+            }
+        }, '.my-tooltip');
+    },
+
+    displayTooltip: function(ele, flag) {
+        // ele.data('flag', flag);
+        clearTimeout(ele.data('timeout'));
+        ele.data('timeout', setTimeout(function() {
+            // var flag = $(ele).data('flag');
+            if (flag) {
+                myTooltip.show(ele);
+            } else {
+                myTooltip.hide(ele);
+            }
+        }, 100));
     },
 
     getOptions: function(ele) {
 
-        ele = $(ele);
-
         var options = {
             tooltip: ele.attr('my-tooltip') || '',
-            position: ele.attr('my-position') || 'top-left',
-            offset: +ele.attr('my-offset') || 0,
+            position: ele.attr('my-position') || 'top', // 'top' ,'bottom'
+            offsetX: +ele.attr('my-offset-x') || 0,
+            offsetY: +ele.attr('my-offset-y') || 0,
             class: ele.attr('my-class') || ''
         };
 
@@ -34,44 +52,77 @@ var myBuble = {
     },
 
     show: function(ele) {
-        var self = $(ele);
-        if (self.data('hasBuble')) {
-            $(ele).next().show();
-            myBuble.setPosition(self);
+        if (ele.data('hasTooltip')) {
+            ele.next().show();
+            // myTooltip.setPosition(ele);
             return;
         }
 
-        // self.wrap('<div class="buble"></div>');
+        var options = myTooltip.getOptions(ele);
 
-        var options = myBuble.getOptions(self);
-
-        var buble = $('<span class="my-tooltip"></span>').html('' + options.tooltip);
+        var tooltip = $('<span class="my-tooltip"></span>').html('' + options.tooltip);
         if (options.class) {
-            buble.addClass(options.class);
+            tooltip.addClass(options.class);
         }
 
-        self.after(buble);
+        if (options.position == 'top') {
+            tooltip.addClass('my-tooltip-top');
+        }
 
-        myBuble.setPosition(self);
-        
-        self.data('hasBuble', true);
+        if (options.position == 'bottom') {
+            tooltip.addClass('my-tooltip-bottom');
+        }
+
+        ele.after(tooltip);
+
+        myTooltip.setPosition(ele);
+
+        ele.data('hasTooltip', true);
     },
 
     hide: function(ele) {
-        $(ele).next().hide();
+        ele.next().hide();
     },
 
     setPosition: function(ele) {
 
-        var buble = ele.next(),
+        var tooltip = ele.next(),
             offset = ele.offset(),
-            position = myBuble.getOptions(ele).position;
+            options = myTooltip.getOptions(ele),
+            width = tooltip.outerWidth(),
+            height = tooltip.outerHeight(),
+            _width = ele.outerWidth(),
+            _height = ele.outerHeight(),
+            offsetTop = offset.top,
+            offsetLeft = offset.left;
 
-        buble.css({
-            top: offset.top,
-            left: offset.left
-        });
+        var positionObj = {};
+        switch (options.position) {
+            case 'top':
+                positionObj = {
+                    top: offsetTop - height - 10,
+                    left: offsetLeft + _width / 2 - width / 2
+                }
+                break;
+            case 'bottom':
+                positionObj = {
+                    top: offsetTop + _height + 10,
+                    left: offsetLeft + _width / 2 - width / 2
+                }
+                break;
+            default:
+                positionObj = {
+                    top: offset.top - height,
+                    left: offset.left - width
+                }
+                break;
+        }
+
+        positionObj.top += options.offsetY;
+        positionObj.left += options.offsetX;
+
+        tooltip.css(positionObj);
     }
 }
 
-$(myBuble.initialize);
+$(myTooltip.initialize);
