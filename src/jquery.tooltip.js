@@ -45,7 +45,7 @@ var myTooltip = {
             position: ele.attr('my-position') || 'top', // 'top' ,'bottom'
             offsetX: +ele.attr('my-offset-x') || 0,
             offsetY: +ele.attr('my-offset-y') || 0,
-            class: ele.attr('my-class') || ''
+            className: ele.attr('my-class') || ''
         };
 
         return options;
@@ -61,8 +61,8 @@ var myTooltip = {
         var options = myTooltip.getOptions(ele);
 
         var tooltip = $('<span class="my-tooltip"></span>').html('' + options.tooltip);
-        if (options.class) {
-            tooltip.addClass(options.class);
+        if (options.className) {
+            tooltip.addClass(options.className);
         }
 
         if (options.position == 'top') {
