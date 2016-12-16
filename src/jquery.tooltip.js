@@ -87,14 +87,14 @@ var myTooltip = {
     setPosition: function(ele) {
 
         var tooltip = ele.next(),
-            offset = ele.offset(),
+            position = ele.position(),
             options = myTooltip.getOptions(ele),
             width = tooltip.outerWidth(),
             height = tooltip.outerHeight(),
             _width = ele.outerWidth(),
             _height = ele.outerHeight(),
-            offsetTop = offset.top,
-            offsetLeft = offset.left;
+            offsetTop = position.top,
+            offsetLeft = position.left;
 
         var positionObj = {};
         switch (options.position) {
@@ -112,8 +112,8 @@ var myTooltip = {
                 break;
             default:
                 positionObj = {
-                    top: offset.top - height,
-                    left: offset.left - width
+                    top: offsetTop - height - 10,
+                    left: offsetLeft + _width / 2 - width / 2
                 }
                 break;
         }
