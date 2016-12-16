@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <title>buble-test</title>
+    <link rel="stylesheet" type="text/css" href="../src/jquery.tooltip.css" />
     <script type="text/javascript" src="../src/jquery-2.1.4.js"></script>
     <script type="text/javascript" src="../src/jquery.tooltip.js"></script>
     <style type="text/css">
@@ -15,39 +16,7 @@
         position: relative;
         margin-top: 200px;
         background-color: #eee;
-    }
-    
-    .my-tooltip {
-        position: absolute;
-        padding: 20px;
-        background-color: black;
-        opacity: 0.5;
-        border-radius: 5px;
-        color: white;
-        top: 0;
-        left: 0;
-    }
-    
-    .my-tooltip:after {
-        content: '';
-        position: absolute;
-        width: 0;
-        height: 0;
-        border: 10px solid;
-    }
-    
-    .my-tooltip-top:after {
-        border-color: rgb(0, 0, 0) transparent transparent transparent;
-        bottom: 0;
-        left: 50%;
-        margin-bottom: -20px;
-    }
-    
-    .my-tooltip-bottom:after {
-        border-color: transparent transparent rgb(0, 0, 0) transparent;
-        top: 0;
-        left: 50%;
-        margin-top: -20px;
+        box-sizing: border-box;
     }
     </style>
 </head>

@@ -93,8 +93,8 @@ var myTooltip = {
             height = tooltip.outerHeight(),
             _width = ele.outerWidth(),
             _height = ele.outerHeight(),
-            offsetTop = position.top,
-            offsetLeft = position.left;
+            offsetTop = position.top + +ele.css('margin-top').split('px')[0],
+            offsetLeft = position.left + +ele.css('margin-left').split('px')[0];
 
         var positionObj = {};
         switch (options.position) {
