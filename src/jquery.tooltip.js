@@ -54,7 +54,7 @@ var myTooltip = {
     show: function(ele) {
         if (ele.data('hasTooltip')) {
             ele.next().show();
-            // myTooltip.setPosition(ele);
+            myTooltip.setPosition(ele);
             return;
         }
 
@@ -101,19 +101,19 @@ var myTooltip = {
             case 'top':
                 positionObj = {
                     top: offsetTop - height - 10,
-                    left: offsetLeft + _width / 2 - width / 2
+                    left: offsetLeft + _width / 2 - width / 2 - 10
                 }
                 break;
             case 'bottom':
                 positionObj = {
                     top: offsetTop + _height + 10,
-                    left: offsetLeft + _width / 2 - width / 2
+                    left: offsetLeft + _width / 2 - width / 2 - 10
                 }
                 break;
             default:
                 positionObj = {
                     top: offsetTop - height - 10,
-                    left: offsetLeft + _width / 2 - width / 2
+                    left: offsetLeft + _width / 2 - width / 2 - 10
                 }
                 break;
         }
