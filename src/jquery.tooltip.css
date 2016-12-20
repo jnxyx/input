@@ -32,3 +32,17 @@
     left: 50%;
     margin-top: -20px;
 }
+
+.myNote {
+    width: 20px;
+    height: 20px;
+    background: rgb(51, 51, 51);
+    display: inline-block;
+    cursor: pointer;
+    color: rgb(249, 249, 249);
+    line-height: 20px;
+    text-align: center;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 16px;
+}
